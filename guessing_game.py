@@ -1,10 +1,14 @@
 #imports
-import guizero
-from guizero import App, Text, PushButton, Box
+
+import guizero, random as r
+from guizero import App, Text, PushButton, Box, TextBox
 
 #variables 
+
 #how many guesses it took to guess the correct number
 guess_number = 1
+guess_number_player = 0
+number_selected = 0
 
 #App setup
 my_app = App(title="Guessing Game", width=800, height=800,
@@ -28,7 +32,13 @@ def computer_guessing():
     computer_box.show()
 
 def player_guessing():
-    pass 
+    global number_selected
+    #makes start screen UI invisible
+    game_select_box.hide()
+    #randomizes the number
+    number_selected = r.randint(1,100)
+    #makes the player game UI visible
+    player_box.show()
 
 #what happens when you click higher
 def higher_click():
@@ -441,6 +451,29 @@ def lower_click():
         guess_number += 1
         guess_display.value = 87
 
+#runs when the button is pressed, calculates guess vs real number 
+def guess_entered():
+    #sets global variables
+    global number_selected, guess_number_player
+    #saves what the box value is to compare it to the random number
+    number_entered = int(guess_box.value)
+    #if number is less than guess
+    if number_selected < number_entered:
+        higher_or_lower.value = "Lower"
+        guess_number_player += 1
+    #if number is greater than guess
+    elif number_selected > number_entered:
+        higher_or_lower.value = "Higher"
+        guess_number_player += 1
+    #if number is equal to guess
+    elif number_entered == number_selected:
+        #resets and changes to win screen
+        player_box.hide()
+        player_win_box.show()
+        guess_number_player += 1
+        #updates how many guesses you took
+        guess_number_took.value = f"You used {guess_number_player} guesses!"
+
 def correct_click():
     #sets screen to non visible
     computer_box.hide()
@@ -452,10 +485,16 @@ def correct_click():
     finish_box.show()
 
 def back_to_start_click():
-    global guess_number
+    #global variables
+    global guess_number, guess_number_player
+    #resets variables
     guess_number = 1
+    guess_number_player = 0
     guess_display.value = 50
+    guess_box.value = "Enter guess here then press button!"
+    #hides both screens and displays old screen
     finish_box.hide()
+    player_win_box.hide()
     game_select_box.show()
 
 #box for start screen 
@@ -465,6 +504,7 @@ start_box = Box(my_app, width = 800, height = 800, layout = "grid", grid = [0,0]
 title = Text(start_box, text = "Ultimate Guessing Game", size = 50,
              color = "red", grid = [1,0])
 
+#starts the game
 start_button = PushButton(start_box, grid = [1,1], text = "Play!!!"
                                    , width = 10, height = 5,command = start_game)
 
@@ -484,6 +524,10 @@ game_mode = Text(game_select_box, text = "What game mode would you like?", size 
 computer_guess_button = PushButton(game_select_box, grid = [1,2], text = "Computer Guesses"
                                    , width = 10, height = 5,command = computer_guessing)
 
+#game mode button two
+player_guess_button = PushButton(game_select_box, grid = [1,3], text = "Player Guesses"
+                                   , width = 10, height = 5,command = player_guessing)
+
 #Computer guessing game UI
 
 #computer box
@@ -494,7 +538,7 @@ title_computer = Text(computer_box, text= "Guessing Game!",
              size = 50, color = "red", grid = [1,0])
 
 #sub heading
-sub_heading = Text(computer_box,text = "What number are you thinking?",
+sub_heading_computer = Text(computer_box,text = "What number are you thinking?",
                    grid = [1,1], size = 25, color = "red")
 
 #my guess text
@@ -519,6 +563,52 @@ lower_button = PushButton(button_box,grid = [0,1], width = 10, height = 5,
 #button three, correct
 correct_button = PushButton(button_box, grid = [0,2], width = 10,
                             height = 5, text = "Correct", command = correct_click)
+
+#Player game UI
+
+#Player box
+player_box = Box(my_app, width = 800, height = 800, layout = "grid", visible = False, grid = [0,0])
+
+#the title
+title_player = Text(player_box, text= "Guessing Game!",
+             size = 50, color = "red", grid = [1,0])
+
+#sub heading
+sub_heading_player = Text(player_box,text = "What number am I thinking?",
+                   grid = [1,1], size = 25, color = "red")
+
+#tells the player to submit their guess, UI
+submit_guess = Text(player_box, text = "Submit your guess!", grid = [1,2],
+                    size = 25, color = "red")
+
+#text box where player submits their guess
+guess_box = TextBox(player_box, width = 50, text = "Enter guess here then press button!",
+                    grid = [1,3])
+
+#submit guess button 
+submit_guess_button = PushButton(player_box, grid = [1,4], width = 10,
+                            height = 5, text = "Submit", command = guess_entered)
+
+#higher or lower text
+higher_or_lower = Text(player_box, text = "Please submit a guess", grid = [1,5],
+                       size = 50, color = "red")
+
+#Player win UI
+
+#box that holds the player win screen
+player_win_box = Box(my_app, width = 800, height = 800, layout = "grid", visible = False, grid = [0,0])
+
+#the title of win
+you_won = Text(player_win_box, text= "You Won!",
+             size = 50, color = "red", grid = [0,0])
+
+#How many guesses you took display
+guess_number_took = Text(player_win_box, text= f"You used {guess_number_player} guesses!",
+                         size= 50, color = "red", grid = [0,1])
+
+#returns to game mode select screen
+return_button = PushButton(player_win_box, grid = [0,2], width = 10,
+                            height = 5, text = "Return to game mode", command = back_to_start_click)
 
 #Finish screen UI 
 
