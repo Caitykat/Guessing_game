@@ -7,10 +7,28 @@ from guizero import App, Text, PushButton, Box
 guess_number = 1
 
 #App setup
-my_app = App(title="Guessing Game", width=600, height=800,
-              layout = "grid", bg = "pink")
+my_app = App(title="Guessing Game", width=800, height=800,
+            bg = "pink", layout = "grid")
 
 #Functions!!!!!!!
+
+#starts game
+def start_game():
+    #makes start screen UI invisible
+    start_box.hide()
+    #takes to game select screen UI visible
+    game_select_box.show()
+
+
+#runs computer guessing
+def computer_guessing():
+    #makes start screen UI invisible
+    game_select_box.hide()
+    #Makes the computer game UI visible
+    computer_box.show()
+
+def player_guessing():
+    pass 
 
 #what happens when you click higher
 def higher_click():
@@ -204,6 +222,7 @@ def higher_click():
     elif guess_display.value == "98":
         guess_number += 1
         guess_display.value = 99
+
 
 #what happens when you click lower
 def lower_click():
@@ -424,46 +443,70 @@ def lower_click():
 
 def correct_click():
     #sets screen to non visible
-    title.visible = False
-    sub_heading.visible = False
-    my_guess.visible = False
-    guess_display.visible = False
-    button_box.visible = False
-    higher_button.visible = False
-    lower_button.visible = False
-    correct_button.visible= False
-    #sets win screen to visible
-    win_text.visible = True
-    number.visible = True
+    computer_box.hide()
     #updates to display most recent data
     number.value = guess_display.value 
-    it_took.visible = True
-    guess.visible = True
     #updates to display most recent data
     guess.value = guess_number 
-    guesses_it_took.visible = True
+    #makes finish screen visible
+    finish_box.show()
 
-#centers the text
-center = Box(my_app, width = 100, height = 50, grid = [0,0])
+def back_to_start_click():
+    global guess_number
+    guess_number = 1
+    guess_display.value = 50
+    finish_box.hide()
+    game_select_box.show()
+
+#box for start screen 
+start_box = Box(my_app, width = 800, height = 800, layout = "grid", grid = [0,0])
+
+#title
+title = Text(start_box, text = "Ultimate Guessing Game", size = 50,
+             color = "red", grid = [1,0])
+
+start_button = PushButton(start_box, grid = [1,1], text = "Play!!!"
+                                   , width = 10, height = 5,command = start_game)
+
+#game select screen UI
+
+#box for game select
+game_select_box = Box(my_app, width = 800, height = 800, layout = "grid", visible = False, grid =[0,0])
+#Title screen title
+title_start = Text(game_select_box, text = "Guessing Game!", size = 50,
+             color = "red", grid = [1,0])
+
+#game mode text
+game_mode = Text(game_select_box, text = "What game mode would you like?", size = 25,
+             color = "red", grid = [1,1])
+
+#game mode button one
+computer_guess_button = PushButton(game_select_box, grid = [1,2], text = "Computer Guesses"
+                                   , width = 10, height = 5,command = computer_guessing)
+
+#Computer guessing game UI
+
+#computer box
+computer_box = Box(my_app, width = 800, height = 800, layout = "grid", visible = False, grid = [0,0])
 
 #the title
-title = Text(my_app, text= "Guessing Game",
+title_computer = Text(computer_box, text= "Guessing Game!",
              size = 50, color = "red", grid = [1,0])
 
 #sub heading
-sub_heading = Text(my_app,text = "What number are you thinking?",
+sub_heading = Text(computer_box,text = "What number are you thinking?",
                    grid = [1,1], size = 25, color = "red")
 
 #my guess text
-my_guess = Text(my_app, text = "My guess is...", grid = [1,2],
+my_guess = Text(computer_box, text = "My guess is...", grid = [1,2],
                 size = 50, color = "red")
 
 #guess display
-guess_display = Text(my_app, text = 50, grid = [1,3],
+guess_display = Text(computer_box, text = 50, grid = [1,3],
                      size = 100, color = "red")
 
 #box for the buttons
-button_box = Box(my_app, grid = [1,4], width = 300, height = 300)
+button_box = Box(computer_box, grid = [1,4], width = 300, height = 300, layout = "grid")
 
 #Button one, higher
 higher_button = PushButton(button_box,grid = [0,0], width = 10, height = 5,
@@ -477,25 +520,35 @@ lower_button = PushButton(button_box,grid = [0,1], width = 10, height = 5,
 correct_button = PushButton(button_box, grid = [0,2], width = 10,
                             height = 5, text = "Correct", command = correct_click)
 
+#Finish screen UI 
+
+#finish box
+finish_box = Box(my_app, width = 800, height = 800,layout = "grid", visible = False,grid = [0,0])
+
 #text (only visible after guess is correct)
-win_text = Text(my_app, text = "Your number was", grid = [1,0],
-                size = 50, color = "red", visible = False)
+win_text = Text(finish_box, text = "Your number was", grid = [1,0],
+                size = 50, color = "red")
 
 #displays what their number was
-number = Text(my_app, text = guess_display.value, grid = [1,1],
-              size = 100, color = "red", visible = False)
+number = Text(finish_box, text = guess_display.value, grid = [1,1],
+              size = 100, color = "red")
 
 #text on win #2
-it_took = Text(my_app, text = "It took me", grid = [1,2],
-               size = 50, color = "red", visible = False)
+it_took = Text(finish_box, text = "It took me", grid = [1,2],
+               size = 50, color = "red")
 
 #number of guesses it took to get number
-guess = Text(my_app, text = guess_number, grid = [1,3],
-             size = 100, color = "red", visible = False)
+guess = Text(finish_box, text = guess_number, grid = [1,3],
+             size = 100, color = "red")
 
 #final text
-guesses_it_took = Text(my_app, text = "guesses to guess your number", grid = [1,4],
-                       size = 25, color = "red", visible = False)
+guesses_it_took = Text(finish_box, text = "guesses to guess your number", grid = [1,4],
+                       size = 25, color = "red")
+
+#back to select screen
+back_to_start = PushButton(finish_box, grid = [1,5], width = 10,
+                            height = 5,text = "Back To Select",
+                              command = back_to_start_click)
 
 
 #runs app!
