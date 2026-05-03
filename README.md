@@ -10,11 +10,11 @@ guizero,
 pillow
 
 ## How to run the code!
-There are two ways to run this code. If you are on Macos, I have an executable file you can run. However, if you are on a different platform you will need to run the code directly. I apologize for this and I am currently working on trying to fix that.
+There are two ways to run this code. If you are on windows or linux, I have an executable file you can run. However, if you are on Mac you will need to run the code directly. I apologize for this and I am currently working on trying to fix that.
 
-Macos executible file - As stated, this only runs on Mac. 
+Windows and linux executable file - In order to reach this executable file you need to go to my github. Navigate to the release v.1.0.0 (windows). Within this release you should see a file "guessing_game.zip" within this zip file is the executable file. Double click on the application and the game should run! Enjoy!
 
-Downloading the source code - This is what works for all other systems. In order to reach the source code, go to the v1.0.0 (macOS) release. In this release there is a file titled "Source code". This takes you to the file with the code and the read me. Make sure you have the dependencies and you should be able to run the code locally. Im sorry this is the only option and im working on fixing it. 
+Downloading the source code - This is what works for mac. In order to reach the source code, go to the v1.0.0 (windows) release. In this release there is a file titled "Source code.zip". This takes you to the file with the code and the read me. Make sure you have the dependencies and you should be able to run the code locally. Im sorry this is the only option and im working on fixing it. 
 
 ## Start screen
 Only shown once in the game, press the start button to get started with the actual game
@@ -51,6 +51,6 @@ This is the screen that displays after the player guesses the correct number.
 
 It displays:
 How many guesses it took,
-A button that when pressed will take you back to game mode select,
+A button that when pressed will take you back to game mode select
 
 # Thank you so much for playing my game! I hope you enjoy!
