@@ -1,3 +1,0 @@
-([('guessing_game',
-   '/Users/caitlyntrail/Documents/GitHub/Guessing_game/dist/guessing_game',
-   'EXECUTABLE')],)
