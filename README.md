@@ -10,11 +10,13 @@ guizero,
 pillow
 
 ## How to run the code!
-There are two ways to run this code. If you are on windows or linux, I have an executable file you can run. However, if you are on Mac you will need to run the code directly. I apologize for this and I am currently working on trying to fix that.
+There are two ways to run this code without having to run the source code yourself. If you are on windows or linux, I have an executable file you can run. If you are on Macos, there is a file that will run in terminal, but its a little more complicated for you. Fear not, I have instructions no matter what you may be doing.
 
-Windows and linux executable file - In order to reach this executable file you need to go to my github. Navigate to the release v.1.0.0 (windows). Within this release you should see a file "guessing_game.zip" within this zip file is the executable file. Double click on the application and the game should run! Enjoy!
+Windows and linux executable file - In order to reach this executable file you need to go to my github (caitykat, repository is guessing_game). Navigate to the release v.1.0.0 (windows). Within this release you should see a file "guessing_game.zip". Within this zip file is the executable file. Double click on the application and the game should run! Enjoy!
 
-Downloading the source code - This is what works for mac. In order to reach the source code, go to the v1.0.0 (windows) release. In this release there is a file titled "Source code.zip". This takes you to the file with the code and the read me. Make sure you have the dependencies and you should be able to run the code locally. Im sorry this is the only option and im working on fixing it. 
+MacOS terminal - In order to reach this file you need to go to my github (Caitykat, repository is guessing_game). Navigate to the second release v.2.0.0 (macOS). Within this release you should see a file "guessing_game.app.zip". Double click on this file to download it and try to open it. One of two things may happen. It will either open the game and there you go! If this doesnt happen and instead the computer blocks it from running, this is an easy fix. Go to your system settings. Find privacy and security and scroll to the bottom. You should see a part that says ""guessing_game" was blocked to protect your mac." Click open anyways and input your password. Then boom! The game is running. Enjoy!
+
+Running the source code locally - In either of the releases the source code is provided. This, or its just included in the files of the github page. Install one of the source code zip files and find the "guessing_game.py" file. This is the code you need to run it. I have the dependencies listed above and you will need all three to ensure the code runs correctly. Guizero is the most important as the entire app is made using it. In order for guizero to run, you also need numpy and pillow. There are plenty of tutorials online on how to instal this. Run it locally on your computer and enjoy!
 
 ## Start screen
 Only shown once in the game, press the start button to get started with the actual game
